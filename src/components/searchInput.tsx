@@ -15,7 +15,6 @@ export function SearchInput(props: SearchInputProps) {
 	const [isInputFocused, setIsInputFocused] = React.useState(false);
 	const [isAutocompleteListDismissed, setIsAutocompleteListDismissed] =
 		React.useState(false);
-	console.log(props.data);
 
 	const { data, onValueChange, ...rest } = props;
 	const shouldShowList =
