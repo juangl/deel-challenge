@@ -1,5 +1,6 @@
 # DEEL Challenge
 
+Live version: https://deel-challenge.vercel.app/
 ## Instructions
 
 ```bash
