@@ -1,9 +1,11 @@
 import React from "react";
 import { ListItem } from "../hooks/useAsyncList";
+import { AutocompleteItem } from "./autocompleteItem";
 
 interface SearchInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
 	data: ListItem[];
 	onValueChange: (value: string) => void;
+	value: string;
 }
 /**
  * Reusable search input component with autocomplete box
@@ -22,6 +24,7 @@ export function SearchInput(props: SearchInputProps) {
 		<div className="relative block">
 			<input
 				{...rest}
+				value={props.value}
 				onFocus={() => {
 					setIsInputFocused(true);
 					setIsAutocompleteListDismissed(false);
@@ -38,7 +41,9 @@ export function SearchInput(props: SearchInputProps) {
 				<div className="absolute mt-2 bg-gray-100 rounded p-1 max-h-52 overflow-y-auto w-full drop-shadow-md">
 					<ul>
 						{props.data.map((item) => (
-							<li
+							<AutocompleteItem
+								item={item}
+								searchValue={props.value}
 								className="truncate flex-1 p-1 cursor-pointer hover:bg-gray-300"
 								key={item.key}
 								onMouseDown={(e) => {
@@ -49,9 +54,7 @@ export function SearchInput(props: SearchInputProps) {
 									onValueChange(item.value);
 									setIsAutocompleteListDismissed(true);
 								}}
-							>
-								{item.value}
-							</li>
+							/>
 						))}
 					</ul>
 				</div>
