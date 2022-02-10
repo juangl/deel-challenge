@@ -11,13 +11,18 @@ export function SearchBookInput() {
 			const response = await fetch(
 				`${
 					import.meta.env.VITE_APP_OPEN_LIBRARY_API_BASE_URL
-				}/search.json?fields=title&title=${searchValue}`,
+				}/search.json?limit=20&fields=title,key&title=${searchValue}`,
 				{
 					signal,
 				},
 			);
 
-			return (await response.json()).docs;
+			return (await response.json()).docs.map(
+				(doc: { title: string; key: string }) => ({
+					value: doc.title,
+					key: doc.key,
+				}),
+			);
 		},
 	});
 
@@ -25,8 +30,8 @@ export function SearchBookInput() {
 		<SearchInput
 			data={list.data}
 			value={list.searchValue}
-			onChange={(e) => {
-				list.setSearchValue(e.target.value);
+			onValueChange={(value) => {
+				list.setSearchValue(value);
 			}}
 		/>
 	);

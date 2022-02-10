@@ -1,11 +1,16 @@
 import React from "react";
 
+export interface ListItem {
+	key: string;
+	value: string;
+
+}
 const initialState = {
 	searchValue: "",
 	isLoading: false,
 	isError: false,
 	error: null as string | null,
-	data: [],
+	data: [] as ListItem[],
 };
 
 type AsyncListState = typeof initialState;
@@ -52,6 +57,10 @@ function asyncListReducer(state: AsyncListState, action: AsyncListAction) {
 interface UseAsyncListParams {
 	load: (params: { searchValue: string; signal: AbortSignal }) => Promise<[]>;
 }
+
+/**
+ * reusable hook for fetching lists from an API 
+ */
 export function useAsyncList(params: UseAsyncListParams) {
 	const [state, dispatch] = React.useReducer(asyncListReducer, initialState);
 
