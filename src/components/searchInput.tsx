@@ -31,7 +31,7 @@ export function SearchInput(props: SearchInputProps) {
 				}}
 				onBlur={() => setIsInputFocused(false)}
 				ref={inputRef}
-				className="w-full text-sm p-2 w-80 ring-1 ring-slate-900/10 shadow-sm rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 caret-pink-500"
+				className="w-full text-sm p-2 ring-1 ring-slate-900/10 shadow-sm rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 caret-pink-500"
 				onChange={(e) => {
 					setIsAutocompleteListDismissed(false);
 					onValueChange(e.target.value);
